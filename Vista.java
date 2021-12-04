@@ -19,10 +19,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -166,7 +166,8 @@ public class Vista extends JFrame implements ActionListener {
 
 		// Tabla Telemetria Extendida
 		columnasTelemetriaExtendida = new String[] { "Indice Mensaje", "Codigo Evento", "Fecha Evento", "Hora Evento",
-				"Latitud", "Longitud", "Velocidad", "Orientacion", "Ignicion", "Fuen. Alim", "Aceleracion", "IDLE" ,"Odometro","IMEI" };
+				"Latitud", "Longitud", "Velocidad", "Orientacion", "Ignicion", "Fuen. Alim", "Aceleracion", "IDLE",
+				"Odometro", "IMEI" };
 		datosFilaTelemetriaExtendida = new Object[columnasTelemetriaExtendida.length];
 
 		tablaTelemetriaExtendida = new JTable();
@@ -178,37 +179,45 @@ public class Vista extends JFrame implements ActionListener {
 		tablaTelemetriaExtendida.setModel(modeloTelemetriaExtendida);
 
 	}
-	
-	private void agregarTelemetriaBasica(Telemetria telemetria) {
-		datosFilaTelemetriaBasica[0] = telemetria.getIndice();
-		datosFilaTelemetriaBasica[1] = listaEvento(telemetria.getCodigoEvento());
-		datosFilaTelemetriaBasica[2] = showFecha(telemetria.getFechaEvento());
-		datosFilaTelemetriaBasica[3] = showHora(telemetria.getHoraEvento());
-		datosFilaTelemetriaBasica[4] = telemetria.getLatitud();
-		datosFilaTelemetriaBasica[5] = telemetria.getLongitud();
-		datosFilaTelemetriaBasica[6] = telemetria.getVelocidad();
-		datosFilaTelemetriaBasica[7] = telemetria.getOrientacion();
-		
-		modeloTelemetriaBasica.addRow(datosFilaTelemetriaBasica);
+
+	private void agregarTelemetriaBasica(List<Telemetria> telemetria) {
+
+		for (int i = 0; i < telemetria.size(); i++) {
+			datosFilaTelemetriaBasica[0] = telemetria.get(i).getIndice();
+			datosFilaTelemetriaBasica[1] = listaEvento(telemetria.get(i).getCodigoEvento());
+			datosFilaTelemetriaBasica[2] = showFecha(telemetria.get(i).getFechaEvento());
+			datosFilaTelemetriaBasica[3] = showHora(telemetria.get(i).getHoraEvento());
+			datosFilaTelemetriaBasica[4] = telemetria.get(i).getLatitud();
+			datosFilaTelemetriaBasica[5] = telemetria.get(i).getLongitud();
+			datosFilaTelemetriaBasica[6] = telemetria.get(i).getVelocidad();
+			datosFilaTelemetriaBasica[7] = telemetria.get(i).getOrientacion();
+
+			modeloTelemetriaBasica.addRow(datosFilaTelemetriaBasica);
+		}
+
 	}
-	
-	private void agregarTelemetriaExtendida(Telemetria telemetria) {
-		datosFilaTelemetriaExtendida[0] = telemetria.getIndice();
-		datosFilaTelemetriaExtendida[1] = listaEvento(telemetria.getCodigoEvento());
-		datosFilaTelemetriaExtendida[2] = showFecha(telemetria.getFechaEvento());
-		datosFilaTelemetriaExtendida[3] = showHora(telemetria.getHoraEvento());
-		datosFilaTelemetriaExtendida[4] = telemetria.getLatitud();
-		datosFilaTelemetriaExtendida[5] = telemetria.getLongitud();
-		datosFilaTelemetriaExtendida[6] = telemetria.getVelocidad();
-		datosFilaTelemetriaExtendida[7] = telemetria.getOrientacion();
-		datosFilaTelemetriaExtendida[8] = telemetria.getIgnicion();
-		datosFilaTelemetriaExtendida[9] = telemetria.getExtPw();
-		datosFilaTelemetriaExtendida[10] = telemetria.getAceleracion();
-		datosFilaTelemetriaExtendida[11] = telemetria.getIdle();
-		datosFilaTelemetriaExtendida[12] = telemetria.getOdometro();
-		datosFilaTelemetriaExtendida[13] = telemetria.getImei();
-		
-		modeloTelemetriaExtendida.addRow(datosFilaTelemetriaExtendida);
+
+	private void agregarTelemetriaExtendida(List<Telemetria> telemetria) {
+
+		for (int i = 0; i < telemetria.size(); i++) {
+			datosFilaTelemetriaExtendida[0] = telemetria.get(i).getIndice();
+			datosFilaTelemetriaExtendida[1] = listaEvento(telemetria.get(i).getCodigoEvento());
+			datosFilaTelemetriaExtendida[2] = showFecha(telemetria.get(i).getFechaEvento());
+			datosFilaTelemetriaExtendida[3] = showHora(telemetria.get(i).getHoraEvento());
+			datosFilaTelemetriaExtendida[4] = telemetria.get(i).getLatitud();
+			datosFilaTelemetriaExtendida[5] = telemetria.get(i).getLongitud();
+			datosFilaTelemetriaExtendida[6] = telemetria.get(i).getVelocidad();
+			datosFilaTelemetriaExtendida[7] = telemetria.get(i).getOrientacion();
+			datosFilaTelemetriaExtendida[8] = telemetria.get(i).getIgnicion();
+			datosFilaTelemetriaExtendida[9] = telemetria.get(i).getExtPw();
+			datosFilaTelemetriaExtendida[10] = telemetria.get(i).getAceleracion();
+			datosFilaTelemetriaExtendida[11] = telemetria.get(i).getIdle();
+			datosFilaTelemetriaExtendida[12] = telemetria.get(i).getOdometro();
+			datosFilaTelemetriaExtendida[13] = telemetria.get(i).getImei();
+
+			modeloTelemetriaExtendida.addRow(datosFilaTelemetriaExtendida);
+
+		}
 	}
 
 	@Override
@@ -216,15 +225,15 @@ public class Vista extends JFrame implements ActionListener {
 		if (e.getSource() == btnCargarArchivo) {
 			selectorArchivos.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			selectorArchivos.setAcceptAllFileFilterUsed(false);
-	        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto (.txt)", "txt");
-	        selectorArchivos.addChoosableFileFilter(filter);
-	        
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto (.txt)", "txt");
+			selectorArchivos.addChoosableFileFilter(filter);
+
 			selectorArchivos.showOpenDialog(this);
 
 			File archivo = selectorArchivos.getSelectedFile();
-			
+
 			if ((archivo == null) || (archivo.getName().strip().equals("")) || !archivo.exists() || !archivo.isFile()) {
-				JOptionPane.showMessageDialog(this, "Nombre de archivo inválido", "Nombre de archivo inválido",
+				JOptionPane.showMessageDialog(this, "Nombre de archivo invalido", "Nombre de archivo invï¿½lido",
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 
@@ -236,89 +245,91 @@ public class Vista extends JFrame implements ActionListener {
 				String linea;
 				Parseo parseo = null;
 				int err = 0;
-				
+
 				while (entrada.hasNext()) {
 					linea = entrada.nextLine();
+
+					parseo = new Parseo(linea);
+
 					try {
-						parseo = new Parseo(linea);						
-					} catch (Exception e2) {
-						lblElementos.setText(String.valueOf(++err));
-						continue;
+						parseo.operacion();
+					} catch (Exception e1) {
+						parseo.setValido(false);
 					}
-					
-					if(parseo.getValido()) {
-						if(parseo.getBasico()) {
-							agregarTelemetriaBasica(parseo.getTelemetria());
-						}else {
-							agregarTelemetriaExtendida(parseo.getTelemetria());
+
+					if (parseo.getValido()) {
+						if (parseo.getBasico()) {
+							agregarTelemetriaBasica(parseo.getListTelemetria());
+						} else {
+							agregarTelemetriaExtendida(parseo.getListTelemetria());
 						}
-					}else {
+					} else {
 						lblElementos.setText(String.valueOf(++err));
 					}
 				}
-				
+
 				entrada.close();
 			}
 		}
 	}
-	
+
 	private String showFecha(Date fecha) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		return sdf.format(fecha);
 	}
-	
+
 	private String showHora(Date hora) {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 		return sdf.format(hora);
 	}
-	
+
 	private String listaEvento(int codigo) {
 		switch (codigo) {
-		case 0:
-			return "Evento Base";
-		case 1:
-			return "Evento de Conexion";
-		case 2:
-			return "Ignicion Encendida";
-		case 3:
-			return "Ignicion Apagada";
-		case 4:
-			return "IDLE Inicio";
-		case 5:
-			return "IDLE Fin";
-		case 6:
-			return "Desconexion de Bateria";
-		case 7:
-			return "Conexion de Bateria";
-		case 8:
-			return "Aceleracion Agresiva";
-		case 9:
-			return "Frenado Brusco";
-		case 10:
-			return "Posible Colision";
-		case 11:
-			return "Giro Brusco";
-		case 12:
-			return "Conduccion Agresiva";
-		case 13:
-			return "Exceso de Velocidad";
-		case 14:
-			return "Boton de Panico";
-		case 15:
-			return "Desconexion Validador";
-		case 16:
-			return "Conexion Validador";
-		case 17:
-			return "Desconexion Contador Maestro";
-		case 18:
-			return "Conexion Contador Maestro";
-		case 19:
-			return "Contador";
-		case 20:
-			return "Perdida de Comunicacion con Contadores Vinden";
-			
-		default:
-			return "Generico";
+			case 0:
+				return "Evento Base";
+			case 1:
+				return "Evento de Conexion";
+			case 2:
+				return "Ignicion Encendida";
+			case 3:
+				return "Ignicion Apagada";
+			case 4:
+				return "IDLE Inicio";
+			case 5:
+				return "IDLE Fin";
+			case 6:
+				return "Desconexion de Bateria";
+			case 7:
+				return "Conexion de Bateria";
+			case 8:
+				return "Aceleracion Agresiva";
+			case 9:
+				return "Frenado Brusco";
+			case 10:
+				return "Posible Colision";
+			case 11:
+				return "Giro Brusco";
+			case 12:
+				return "Conduccion Agresiva";
+			case 13:
+				return "Exceso de Velocidad";
+			case 14:
+				return "Boton de Panico";
+			case 15:
+				return "Desconexion Validador";
+			case 16:
+				return "Conexion Validador";
+			case 17:
+				return "Desconexion Contador Maestro";
+			case 18:
+				return "Conexion Contador Maestro";
+			case 19:
+				return "Contador";
+			case 20:
+				return "Perdida de Comunicacion con Contadores Vinden";
+
+			default:
+				return "Generico";
 		}
 	}
 }
